@@ -12,12 +12,27 @@ Button::Button(int initPin)
 
 void Button::updateButton()
 {
+    if (startLog() && !logging)
+    {
+        logging = true;
+        startLogTime = millis();
+    }
 
+    if ((startLogTime + logTime) > millis())
+    {
+        /* logging */
+    } else if (logging)
+    {
+        /* Auswertung */
+    }
+    
+    
+    
 }
 
 bool Button::startLog()
 {
-
+    return digitalRead(pin);
 }
 
 bool Button::getPosEdge()

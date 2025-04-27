@@ -26,7 +26,10 @@
             int pin; //Pin Number
 
             outputState state = none; //State of the Button
-            int logTime = 1000; //Time the Button has to log Edges in ms
+            unsigned long logTime = 1000; //Time the Button has to log Edges in ms
+            unsigned long startLogTime = 0; //Time the logging Cycle startet in ms
+            bool logging = false; //True if Button is currently logging
+
             int posEdges = 0; //Number of positive Edges during Log Time
             int negEdges = 0; //Number of negative Edges during Log Time
 
