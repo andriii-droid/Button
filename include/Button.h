@@ -43,9 +43,6 @@
             bool edgeResetN = false; //Helper to ensure that only one positive cycle exists
             unsigned long lastTriggerTimeN = 0; //Time Edge was last triggered
 
-            bool startLog();
-            //Returns true if Button gets pressed
-
             bool getPosEdge();
             //Returns true, if positive Edge is detected
 
