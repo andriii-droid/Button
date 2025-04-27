@@ -23,23 +23,31 @@ bool Button::getState(outputState wantedState) const
 
 void Button::updateButton()
 {
-    if (digitalRead(pin) && !logging)
+    switch (logButton)
     {
-        logging = true;
-        startLogTime = millis();
-    }
+    case start:
+        if (digitalRead(pin))
+        {
+            startLogTime = millis();
 
-    if ((startLogTime + logTime) > millis())
-    {
+            logButton = log;
+        }
+        break;
+    case log:
         posEdges += getPosEdge();
         negEdges += getNegEdge();
-    } else if (logging)
-    {
-       if (posEdges > negEdges)
-       {
+
+        if ((startLogTime + logTime) < millis())
+        {
+            logButton = evaluate;
+        }
+        break;
+    case evaluate:
+        if (posEdges > negEdges)
+        {
         state = time;
-       } else if (posEdges == negEdges)
-       {
+        } else if (posEdges == negEdges)
+        {
             switch (posEdges)
             {
             case 1:
@@ -52,10 +60,15 @@ void Button::updateButton()
                 state = trice;
                 break;
             }
-       } 
-    } 
+        }
 
-    
+        logButton = reset;
+        break;
+    case reset:
+        state = none;
+        logButton = start;
+        break;
+    }
 }
 
 bool Button::getPosEdge()

@@ -16,7 +16,7 @@
            
             bool getState(outputState wantedState) const; 
             //Returns true if wantedState and actual state are the same
-            
+
 
             void updateButton();
             //Updates the State of the Button 
@@ -27,19 +27,22 @@
             int pin; //Pin Number
 
             outputState state = none; //State of the Button
+
+            //updateButton()
+            enum loggingProcess {start, log, evaluate, reset};
+            loggingProcess logButton = start;
             unsigned long logTime = 1000; //Time the Button has to log Edges in ms
             unsigned long startLogTime = 0; //Time the logging Cycle startet in ms
-            bool logging = false; //True if Button is currently logging
 
             int posEdges = 0; //Number of positive Edges during Log Time
             int negEdges = 0; //Number of negative Edges during Log Time
 
-            //getPosEdge
+            //getPosEdge()
             bool readingLastP = false; //Last State of Reading
             bool edgeResetP = false; //Helper to ensure that only one positive cycle exists
             unsigned long lastTriggerTimeP = 0; //Time Edge was last triggered
 
-            //getNegEdge
+            //getNegEdge()
             bool readingLastN = false; //Last State of Reading
             bool edgeResetN = false; //Helper to ensure that only one positive cycle exists
             unsigned long lastTriggerTimeN = 0; //Time Edge was last triggered
