@@ -10,6 +10,17 @@ Button::Button(int initPin)
     pinMode(pin, INPUT);
 }
 
+bool Button::getState(outputState wantedState) const
+{
+    if (wantedState == state)
+    {
+        return true;
+    } else
+    {
+        return false;
+    }
+}
+
 void Button::updateButton()
 {
     if (digitalRead(pin) && !logging)
@@ -43,6 +54,8 @@ void Button::updateButton()
             }
        } 
     } 
+
+    
 }
 
 bool Button::getPosEdge()

@@ -14,8 +14,9 @@
             //Inititialises the Button, 
             //pin: Pin Number of Button
            
-            outputState getState() const {return state;}
-            //Gets current State of the Button
+            bool getState(outputState wantedState) const; 
+            //Returns true if wantedState and actual state are the same
+            
 
             void updateButton();
             //Updates the State of the Button 
