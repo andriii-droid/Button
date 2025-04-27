@@ -4,31 +4,28 @@
 #include <Arduino.h>
 #include <Button.h>
 
-
-bool Button::getButtonPos()
+Button::Button(int initPin)
+    :pin{initPin}
 {
-    bool statePos;
-    bool reading = butNature();
+    pinMode(pin, INPUT);
+}
 
-    if (trigLastTime != reading)
-    {
-        timeLastEdge = millis();
-        trigEdgeTime = LOW;
-    }
+void Button::updateButton()
+{
 
-    if ((millis() - timeLastEdge > trigTime) && !trigEdgeTime)
-    {
-        if (reading)
-        {
-            statePos = true;
-            trigEdgeTime = HIGH;
-        } 
-    } else
-    {
-        statePos = LOW;
-    }
+}
 
-    trigLastTime = reading;
+bool Button::startLog()
+{
 
-    return statePos;
+}
+
+bool Button::getPosEdge()
+{
+    
+}
+
+bool Button::getNegEdge()
+{
+    
 }
