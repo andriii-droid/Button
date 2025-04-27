@@ -22,8 +22,12 @@ void loop()
 {
   b1.updateButton();
 
-  if(b1.getState(b1.click))
+  if(b1.getState(b1.click) || b1.getState(b1.time) || b1.getState(b1.twice))
   {
     digitalWrite(17, !digitalRead(17));
+    Serial.println(b1.getState(b1.click));
+    Serial.println(b1.getState(b1.time));
+    Serial.println(b1.getState(b1.twice));
   }
+
 }

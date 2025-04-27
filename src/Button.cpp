@@ -32,6 +32,7 @@ void Button::updateButton()
 
             logButton = log;
         }
+
         break;
     case log:
         posEdges += getPosEdge();
@@ -66,16 +67,20 @@ void Button::updateButton()
         break;
     case reset:
         state = none;
+        posEdges = 0;
+        negEdges = 0;
+
         logButton = start;
         break;
     }
 }
 
-bool Button::getPosEdge()
+int Button::getPosEdge()
 {
-    bool statePos;
+    bool statePos = false;
+    bool reading = digitalRead(pin);
 
-    if (readingLastP != digitalRead(pin))
+    if (readingLastP != reading)
     {
         lastTriggerTimeP = millis();
         edgeResetP = true;
@@ -83,7 +88,7 @@ bool Button::getPosEdge()
 
     if ((millis() - lastTriggerTimeP > 50) && edgeResetP)
     {
-        if (digitalRead(pin))
+        if (reading)
         {
             statePos = true;
             edgeResetP = false;
@@ -93,16 +98,16 @@ bool Button::getPosEdge()
         statePos = false;
     }
     
-    readingLastP = digitalRead(pin);
-
+    readingLastP = reading;
     return statePos;
 }
 
 bool Button::getNegEdge()
 {
-    bool stateNeg;
+    bool stateNeg = false;
+    bool reading = digitalRead(pin);
 
-    if (readingLastN != digitalRead(pin))
+    if (readingLastN != reading)
     {
         lastTriggerTimeN = millis();
         edgeResetN = true;
@@ -110,7 +115,7 @@ bool Button::getNegEdge()
 
     if ((millis() - lastTriggerTimeN > 50) && edgeResetN)
     {
-        if (!digitalRead(pin))
+        if (!reading)
         {
             stateNeg = true;
             edgeResetN = false;
@@ -120,7 +125,7 @@ bool Button::getNegEdge()
         stateNeg = false;
     }
     
-    readingLastN = digitalRead(pin);
+    readingLastN = reading;
 
     return stateNeg; 
 }
