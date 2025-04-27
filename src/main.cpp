@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include <Button.h>
 
+Button b1{15};
+
 void setup() {
   Serial.begin(9600);
   Serial.println("Setup Complete");
@@ -16,6 +18,12 @@ void setup() {
   digitalWrite(LED_BUILTIN, LOW);
 }
 
-void loop() {
+void loop() 
+{
+  b1.updateButton();
 
+  if(b1.getState(b1.click))
+  {
+    digitalWrite(17, !digitalRead(17));
+  }
 }
