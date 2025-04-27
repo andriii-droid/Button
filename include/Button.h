@@ -8,7 +8,7 @@
     class Button
     {
         public:
-            enum outputState {none, time, twice, click, error};
+            enum outputState {none, time, twice, trice, click, error};
 
             explicit Button(int initPin); 
             //Inititialises the Button, 
@@ -32,6 +32,16 @@
 
             int posEdges = 0; //Number of positive Edges during Log Time
             int negEdges = 0; //Number of negative Edges during Log Time
+
+            //getPosEdge
+            bool readingLastP = false; //Last State of Reading
+            bool edgeResetP = false; //Helper to ensure that only one positive cycle exists
+            unsigned long lastTriggerTimeP = 0; //Time Edge was last triggered
+
+            //getNegEdge
+            bool readingLastN = false; //Last State of Reading
+            bool edgeResetN = false; //Helper to ensure that only one positive cycle exists
+            unsigned long lastTriggerTimeN = 0; //Time Edge was last triggered
 
             bool startLog();
             //Returns true if Button gets pressed
