@@ -2,6 +2,7 @@
 //Headerdatei für die Klasse Button
 //Autor: Andri Andermatt, 15.03.2025
 #include <Arduino.h>
+#include <vector>
 
 #ifndef BUTTON_H_
 #define BUTTON_H_
@@ -17,6 +18,7 @@
             bool getState(outputState wantedState) const; 
             //Returns true if wantedState and actual state are the same
 
+            void static inline updateAll();
 
             void updateButton();
             //Updates the State of the Button 
@@ -27,6 +29,9 @@
             int pin; //Pin Number
 
             outputState state = none; //State of the Button
+
+            //updateAll
+            std::vector<Button*> static buttons; 
 
             //updateButton()
             enum loggingProcess {start, log, evaluate, reset};
@@ -52,5 +57,7 @@
 
             bool getNegEdge();
             //Returns true, if negative Edge is detected
+
+            ~Button();
     };
 #endif //BUTTON_H_

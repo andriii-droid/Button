@@ -8,6 +8,7 @@ Button::Button(int initPin)
     :pin{initPin}
 {
     pinMode(pin, INPUT);
+    buttons.push_back(this);
 }
 
 bool Button::getState(outputState wantedState) const
@@ -18,6 +19,15 @@ bool Button::getState(outputState wantedState) const
     } else
     {
         return false;
+    }
+
+}
+
+void Button::updateAll()
+{
+    for (Button *b : buttons)
+    {
+        b->updateButton();
     }
 }
 
@@ -128,4 +138,11 @@ bool Button::getNegEdge()
     readingLastN = reading;
 
     return stateNeg; 
+}
+
+Button::~Button()
+{
+    buttons.erase(
+        std::remove(buttons.begin(), buttons.end(), this),
+        buttons.end());
 }
