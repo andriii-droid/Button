@@ -25,6 +25,8 @@
             //needs to be run once per Loop.
             //Preferably at the Start of every Loop
 
+            ~Button();
+
         private:
             int pin; //Pin Number
 
@@ -57,7 +59,5 @@
 
             bool getNegEdge();
             //Returns true, if negative Edge is detected
-
-            ~Button();
     };
 #endif //BUTTON_H_
