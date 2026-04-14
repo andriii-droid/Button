@@ -4,6 +4,8 @@
 #include <Arduino.h>
 #include <Button.h>
 
+std::vector<Button*> Button::buttons;
+
 Button::Button(int initPin)
     :pin{initPin}
 {
